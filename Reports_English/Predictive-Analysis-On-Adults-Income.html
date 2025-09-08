@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Predictive Analytics on Adults Income - Naufal Fahri</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="predictive-analytics-on-adults-income---Naufal Fahri"><em><strong>Predictive Analytics On Adults Income - Naufal Fahri</strong></em></h1>
+<p><strong>Jupyter Notebook</strong><br>
+The complete interactive analysis and code for this project can be accessed here: <br>
+<a href="https://github.com/nfahrisalim/Adults-Income-Predictive-Analysis/blob/main/PredictiveAnalysis.ipynb" target="_blank">🔗 View Jupyter Notebook on GitHub</a></p>
+<hr>
+<h2 id="project-domain"><em><strong>Project Domain</strong></em></h2>
+<p><strong>Background</strong></p>
+<p>According to a survey by the Central Statistics Agency of Indonesia published on November 6, 2023, the unemployment rate in Indonesia is 5.32 percent <a href="https://www.bps.go.id/id/pressrelease/2023/11/06/2002/tingkat-pengangguran-terbuka--tpt--sebesar-5-32-persen-dan-rata-rata-upah-buruh-sebesar-3-18-juta-rupiah-per-bulan.html">[1]</a>.Although this is a decrease from previous years, it remains an issue that needs to be resolved. The results of the study by Pramudjasi and Juliansyah, 2019 in the FEB Unmul Journal <a href="https://journal.feb.unmul.ac.id/index.php/KINERJA/article/download/5284/472">[2]</a> stated that the population has a significant positive effect on the unemployment rate. This is also confirmed in the research of Sari and Pangestuty, 2022 in  <a href="https://jdess.ub.ac.id/index.php/jdess/article/download/78/57/373">[3]</a> stating that population growth has an impact on the increase in the Open Unemployment Rate. Various surveys and findings from this academic journal are the background for the Author in trying to analyze what factors have a strong relationship to unemployment, employment, especially factors that are related to high income.</p>
+<p>This project focuses on the analysis of the &quot;Adults Income&quot; dataset with the aim of identifying and predicting factors that have a high correlation, or even contribute to employment, especially the amount of income of a person. In this case, the target feature of this dataset is whether a person's annual income is &lt;50,000 dollars or &gt;= 50,000 dollars per year, so this project will solve the classification case. Although this dataset is taken from the 1996 census data, this dataset still has significant relevance today, due to the general nature of the variables in this dataset and the absence of drastic changes in the components that determine incomedanya perubahan yang drastis pada komponen-komponen penentu penghasilan.</p>
+<p>According to Jepchumba from Microsoft <a href="https://techcommunity.microsoft.com/t5/educator-developer-blog/getting-started-with-using-visual-machine-learning-tools-for/ba-p/3578397">[4]</a>, <em>machine learning</em> , is a technique that uses advanced mathematics and statistics to recognize patterns in data that do not exist explicitly, and can predict according to the results of these patterns. With the variety of factors (variables) involved in this project, machine learning is the best solution. Identification and prediction of factors will be done by applying data analysis techniques such as Exploratory Data Analysis (EDA) and using Machine Learning algorithms such as Random Forest, K-Nearest Neighbors, and Boosting .</p>
+<p>This project is a small tool to help solve the problem of difficulty in finding work, by analyzing the dynamics of high annual income factors. The results of this project are expected to help the Government and individuals in productive age as additional insight related to this problem, and help these parties to develop society and themselves to improve the quality of life.</p>
+<h2 id="business-understanding"><em><strong>Business Understanding</strong></em></h2>
+<p>Stakeholder dan sasaran:</p>
+<ol>
+<li>Government
+As the highest level organization in a country, the government can make good policies and changes, in order to improve the quality of life of its people. One way is to create/improve the system in the country to encourage the advancement of its human resources.</li>
+<li>Individual
+At the individual level, it is hoped that the results of this project will provide insight into important factors that can improve the quality of life, through work and employment with high annual incomes.</li>
+</ol>
+<p><strong>Problem Statements</strong></p>
+<ol>
+<li>Of the various features, which has the most influence on income?</li>
+<li>With certain characteristics, can income be predicted?</li>
+</ol>
+<p>*income refers to annual income.</p>
+<p><strong>Predictive Modelling Goals</strong></p>
+<ol>
+<li>Knowing the features that have a high relationship to income.</li>
+<li>Able to predict income with an accuracy above 90%.</li>
+</ol>
+<p><strong>Solution Statements (Metodologi)</strong></p>
+<ol>
+<li>
+<p>The target feature in this dataset is a boolean variable between &gt;50k and &lt;= 50k, so this is a Classification prediction case.</p>
+</li>
+<li>
+<p>Perform Exploratory Data Analysis to obtain meaningful information in the data and understand the dynamics of the features.</p>
+</li>
+<li>
+<p>Testing the differences between missing values ​​handling techniques, and their impact on the accuracy of machine learning models.</p>
+</li>
+<li>
+<p>Create a machine learning model that can predict income with an accuracy above 90%</p>
+</li>
+<li>
+<p>Using Accuracy, Precision, Recall, F1-Score, and Confusion Matrix to evaluate model performance.</p>
+</li>
+</ol>
+<h2 id="data-understanding"><em><strong>Data Understanding</strong></em></h2>
+<p>Dataset: https://archive.ics.uci.edu/dataset/2/adult</p>
+<p><em><strong>Dataset Overview</strong></em></p>
+<p>The description of the variables in the dataset is as follows:</p>
+<ol>
+<li>age (int64) : sample age</li>
+<li>workclass (object) : sample job status</li>
+<li>fnlwgt (int64) : sample ID</li>
+<li>education (object) : last education sample</li>
+<li>educational-num (int64) : sample's last education in numbers</li>
+<li>marital-status (object) : sample marital status</li>
+<li>occupation (object) : sample job/industry</li>
+<li>relationship (object) : sample relationship status</li>
+<li>race (object) : sample race</li>
+<li>gender (object) : sample gender</li>
+<li>capital-gain (int64) : capital gain</li>
+<li>capital-loss (int64) : capital loss</li>
+<li>hours-per-week (int64) : sample working hours in a week</li>
+<li>native-country (object) : country of origin/grandfather of the sample</li>
+<li>income (object) : sample income</li>
+</ol>
+<p>Detailed description of this dataset is as follows.</p>
+<ol>
+<li>There are 48,842 data samples</li>
+<li>There are two different data types, namely 'object' (categorical), and 'int64' (numeric).</li>
+<li>Of the 15 variable columns, there are 9 categorical columns and 6 numeric columns.</li>
+<li>The division is 14 feature columns and 1 target column.</li>
+<li>In this dataset, missing values, marked with a '?', constitute approximately 7% of the entire dataset.</li>
+</ol>
+<p><strong>Description of the data distribution can be seen in the Univariate Analysis and Multivariate Analysis sections below</strong>.</p>
+<h2 id="univariate-analysis"><em><strong>Univariate Analysis</strong></em></h2>
+<p><img src="../Visual/UnivariateWork.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.0: Univariate analysis of work class vs income</p>
+<p>Description of the workclass distribution can be seen in the following table.</p>
+<p>Table 1.0: Workclass Distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>workclass</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Private</td>
+<td style="text-align:center">33906</td>
+<td style="text-align:center">69.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Self-emp-not-inc</td>
+<td style="text-align:center">3862</td>
+<td style="text-align:center">7.9</td>
+</tr>
+<tr>
+<td style="text-align:center">Local-gov</td>
+<td style="text-align:center">3136</td>
+<td style="text-align:center">6.4</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">2799</td>
+<td style="text-align:center">5.7</td>
+</tr>
+<tr>
+<td style="text-align:center">State-gov</td>
+<td style="text-align:center">1981</td>
+<td style="text-align:center">4.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Self-emp-inc</td>
+<td style="text-align:center">1695</td>
+<td style="text-align:center">3.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Federal-gov</td>
+<td style="text-align:center">1432</td>
+<td style="text-align:center">2.9</td>
+</tr>
+<tr>
+<td style="text-align:center">Without-pay</td>
+<td style="text-align:center">21</td>
+<td style="text-align:center">0.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Never-worked</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>Looking at table 1.0, it can be seen that the mode category of the workclass is Private, with a difference of more than 60%.</p>
+<hr>
+<p><img src="../Visual/univariateEduClss.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.1: Univariate analysis educationClass vs income</p>
+<p>The description of the educationClass distribution can be seen in the following table.</p>
+<p>Table 1.1: Distribution of educationClass</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>educationClass</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HS-grad</td>
+<td style="text-align:center">15784</td>
+<td style="text-align:center">32.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Some-college</td>
+<td style="text-align:center">10878</td>
+<td style="text-align:center">22.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Bachelors</td>
+<td style="text-align:center">8025</td>
+<td style="text-align:center">16.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Masters</td>
+<td style="text-align:center">2657</td>
+<td style="text-align:center">5.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Assoc-voc</td>
+<td style="text-align:center">2061</td>
+<td style="text-align:center">4.2</td>
+</tr>
+<tr>
+<td style="text-align:center">11th</td>
+<td style="text-align:center">1812</td>
+<td style="text-align:center">3.7</td>
+</tr>
+<tr>
+<td style="text-align:center">Assoc-acdm</td>
+<td style="text-align:center">1601</td>
+<td style="text-align:center">3.3</td>
+</tr>
+<tr>
+<td style="text-align:center">10th</td>
+<td style="text-align:center">1389</td>
+<td style="text-align:center">2.8</td>
+</tr>
+<tr>
+<td style="text-align:center">7th-8th</td>
+<td style="text-align:center">955</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Prof-school</td>
+<td style="text-align:center">834</td>
+<td style="text-align:center">1.7</td>
+</tr>
+<tr>
+<td style="text-align:center">9th</td>
+<td style="text-align:center">756</td>
+<td style="text-align:center">1.5</td>
+</tr>
+<tr>
+<td style="text-align:center">12th</td>
+<td style="text-align:center">657</td>
+<td style="text-align:center">1.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Doctorate</td>
+<td style="text-align:center">594</td>
+<td style="text-align:center">1.2</td>
+</tr>
+<tr>
+<td style="text-align:center">5th-6th</td>
+<td style="text-align:center">509</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">1st-4th</td>
+<td style="text-align:center">247</td>
+<td style="text-align:center">0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Preschool</td>
+<td style="text-align:center">83</td>
+<td style="text-align:center">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>In table 1.1, it can be seen that the mode category falls on HS-grad (high school graduate), but the distribution looks more balanced than the Workclass category, with a Right-skewed (positive) distribution trend .</p>
+<hr>
+<p><img src="../Visual/UnivariateStatus.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.2: Univariate analysis of status vs income</p>
+<p>Description of the status distribution can be seen in the following table.</p>
+<p>Table 1.2: Status distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>status</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Married-civ-spouse</td>
+<td style="text-align:center">22379</td>
+<td style="text-align:center">45.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Never-married</td>
+<td style="text-align:center">16117</td>
+<td style="text-align:center">33.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Divorced</td>
+<td style="text-align:center">6633</td>
+<td style="text-align:center">13.6</td>
+</tr>
+<tr>
+<td style="text-align:center">Separated</td>
+<td style="text-align:center">1530</td>
+<td style="text-align:center">3.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Widowed</td>
+<td style="text-align:center">1518</td>
+<td style="text-align:center">3.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Married-spouse-absent</td>
+<td style="text-align:center">628</td>
+<td style="text-align:center">1.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Married-AF-spouse</td>
+<td style="text-align:center">37</td>
+<td style="text-align:center">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>Based on table 1.2, similar to educationClass, the distribution looks more balanced and not high in one category, with a Right-skewed distribution trend.</p>
+<hr>
+<p><img src="../Visual/univariateOcc.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.3: Univariate analysis of occupation vs income</p>
+<p>Information on occupation distribution can be seen in the following table.</p>
+<p>Table 1.3: Occupation distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>occupation</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Prof-specialty</td>
+<td style="text-align:center">6172</td>
+<td style="text-align:center">12.6</td>
+</tr>
+<tr>
+<td style="text-align:center">Craft-repair</td>
+<td style="text-align:center">6112</td>
+<td style="text-align:center">12.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Exec-managerial</td>
+<td style="text-align:center">6086</td>
+<td style="text-align:center">12.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Adm-clerical</td>
+<td style="text-align:center">5611</td>
+<td style="text-align:center">11.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Sales</td>
+<td style="text-align:center">5504</td>
+<td style="text-align:center">11.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Other-service</td>
+<td style="text-align:center">4923</td>
+<td style="text-align:center">10.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Machine-op-inspct</td>
+<td style="text-align:center">3022</td>
+<td style="text-align:center">6.2</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">2809</td>
+<td style="text-align:center">5.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Transport-moving</td>
+<td style="text-align:center">2355</td>
+<td style="text-align:center">4.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Handlers-cleaners</td>
+<td style="text-align:center">2072</td>
+<td style="text-align:center">4.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Farming-fishing</td>
+<td style="text-align:center">1490</td>
+<td style="text-align:center">3.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Tech-support</td>
+<td style="text-align:center">1446</td>
+<td style="text-align:center">3.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Protective-serv</td>
+<td style="text-align:center">983</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Priv-house-serv</td>
+<td style="text-align:center">242</td>
+<td style="text-align:center">0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Armed-Forces</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>In table 1.3, the distribution is increasingly normal, with a mild Right-skewed distribution trend .</p>
+<hr>
+<p><img src="../Visual/univariateRelation.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.4: Univariate analysis relationship vs income</p>
+<p>Description of the relationship distribution can be seen in the following table.</p>
+<p>Table 1.4: Distribution of relationships</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>relationship</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Husband</td>
+<td style="text-align:center">19716</td>
+<td style="text-align:center">40.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Not-in-family</td>
+<td style="text-align:center">12583</td>
+<td style="text-align:center">25.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Own-child</td>
+<td style="text-align:center">7581</td>
+<td style="text-align:center">15.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Unmarried</td>
+<td style="text-align:center">5125</td>
+<td style="text-align:center">10.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Wife</td>
+<td style="text-align:center">2331</td>
+<td style="text-align:center">4.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Other-relative</td>
+<td style="text-align:center">1506</td>
+<td style="text-align:center">3.1</td>
+</tr>
+</tbody>
+</table>
+<p>Then in table 1.4, it can be seen that the dataset trend is quite balanced, with the highest value of Husband. This result can imply that the distribution of Gender will be higher in men than women. This will be confirmed in the Univariate Analysis on the Gender feature.</p>
+<hr>
+<p><img src="../Visual/univariateRace.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.5: Univariate analysis of race vs income</p>
+<p>Description of the race distribution can be seen in the following table.</p>
+<p>Table 1.5: Race distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>race</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">White</td>
+<td style="text-align:center">41762</td>
+<td style="text-align:center">85.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Black</td>
+<td style="text-align:center">4685</td>
+<td style="text-align:center">9.6</td>
+</tr>
+<tr>
+<td style="text-align:center">Asian-Pac-Islander</td>
+<td style="text-align:center">1519</td>
+<td style="text-align:center">3.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Amer-Indian-Eskimo</td>
+<td style="text-align:center">470</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Other</td>
+<td style="text-align:center">406</td>
+<td style="text-align:center">0.8</td>
+</tr>
+</tbody>
+</table>
+<p>From table 1.5, it can be seen that the mode clearly falls in the White category, with a difference of up to 75.9%.</p>
+<hr>
+<p><img src="../Visual/univariateSex.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.6: Univariate analysis of gender vs income</p>
+<p>Information on gender distribution can be seen in the following table.</p>
+<p>Table 1.6: Gender distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>gender</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Male</td>
+<td style="text-align:center">32650</td>
+<td style="text-align:center">66.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Female</td>
+<td style="text-align:center">16192</td>
+<td style="text-align:center">33.2</td>
+</tr>
+</tbody>
+</table>
+<p>The results of table 1.6 confirm the theory of table 1.4, where the distribution of Male is greater than Female.</p>
+<hr>
+<p><img src="../Visual/univariateNative.png" alt="Univariate Visualization" title="Univariate result"></p>
+<p>Figure 1.7: Univariate analysis native vs income</p>
+<p>Description of the native distribution can be seen in the following table.</p>
+<p>*only the top 15 values ​​are displayed, due to too many unique values.</p>
+<p>Table 1.7: Native distribution</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>native</strong></th>
+<th style="text-align:center"><strong>sample count</strong></th>
+<th style="text-align:center"><strong>percentage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USA</td>
+<td style="text-align:center">43832</td>
+<td style="text-align:center">89.7</td>
+</tr>
+<tr>
+<td style="text-align:center">Mexico</td>
+<td style="text-align:center">951</td>
+<td style="text-align:center">1.9</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">857</td>
+<td style="text-align:center">1.8</td>
+</tr>
+<tr>
+<td style="text-align:center">Philippines</td>
+<td style="text-align:center">295</td>
+<td style="text-align:center">0.6</td>
+</tr>
+<tr>
+<td style="text-align:center">Germany</td>
+<td style="text-align:center">206</td>
+<td style="text-align:center">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center">PuertoRic</td>
+<td style="text-align:center">184</td>
+<td style="text-align:center">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Canada</td>
+<td style="text-align:center">182</td>
+<td style="text-align:center">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center">El-Salvador</td>
+<td style="text-align:center">155</td>
+<td style="text-align:center">0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">India</td>
+<td style="text-align:center">151</td>
+<td style="text-align:center">0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Cuba</td>
+<td style="text-align:center">138</td>
+<td style="text-align:center">0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">England</td>
+<td style="text-align:center">127</td>
+<td style="text-align:center">0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">China</td>
+<td style="text-align:center">122</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">South</td>
+<td style="text-align:center">115</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Jamaica</td>
+<td style="text-align:center">106</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Italy</td>
+<td style="text-align:center">105</td>
+<td style="text-align:center">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>In table 1.7 it can be seen that the mode falls in the USA category, with a percentage difference of up to 87.8% with the next category.</p>
+<hr>
+<p><img src="../Visual/univariateNum.png" alt="Univariate Visualization" title="Univariate result">
+Figure 1.8: Univariate analysis of numerical features distribution</p>
+<p>In Figure 1.8, it can be seen that the majority of numerical distributions have mode values ​​with very high differences compared to the other values.</p>
+<hr>
+<p><em><strong>Analysis and interpretation of Univariate Analysis results:</strong></em></p>
+<ol>
+<li>Missing values ​​are marked with '?'.
+The majority of the variable distributions are heavily biased towards the mode, with very large percentage differences. This implies that this dataset can be addressed for missing values ​​using statistical methods, such as Mode Imputation .</li>
+</ol>
+<h2 id="multivariate-analysis"><em><strong>Multivariate Analysis</strong></em></h2>
+<p><img src="../Visual/workClass.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.0: Multivariate analysis of work class vs income</p>
+<p>In workclass, it can be seen that all workclasses have income, except of course never-worked. On average, those who work for the government (-gov) have a higher income compared to other workclasses, but self-emp-inc has the highest income.</p>
+<hr>
+<p><img src="../Visual/educationClass.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.1: Multivariate analysis educationClass vs income</p>
+<p>On educationClass, it can be clearly seen that there is a very large gap starting from the undergraduate level (bachelors), and even higher the higher the degree held (masters, doctorate, prof-school).</p>
+<hr>
+<p><img src="../Visual/MultivariateVis.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.2: Multivariate analysis of status vs income</p>
+<p>In terms of marital status, a trend can also be seen that data with stable marital status have higher incomes compared to those who are unmarried, divorced, separated, or divorced by death.</p>
+<hr>
+<p><img src="../Visual/occ.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.3: Multivariate analysis of occupation vs income</p>
+<p>In occupation, the three highest-paying sectors are Specialty, Managerial, and Protective Service. In addition, there is no clear trend that can be observed.</p>
+<hr>
+<p><img src="../Visual/relationship.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.4: Multivariate analysis of relationship vs income</p>
+<h2 id="in-relationships-it-can-be-seen-that-it-strengthens-the-results-of-observations-of-marital-status-those-with-the-status-of-husband-and-wife-have-the-highest-income-from-other-data">In relationships, it can be seen that it strengthens the results of observations of marital status, those with the status of husband and wife have the highest income from other data.</h2>
+<p><img src="../Visual/race.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.5: Multivariate analysis of race vs income</p>
+<p>In racing, the two races with the highest income are White (white) and Asian-Pac (Asia-Pacific)</p>
+<hr>
+<p><img src="../Visual/sex.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.6: Multivariate analysis of gender vs income</p>
+<p>In terms of gender, it can be seen that men's income is higher than women's income.</p>
+<hr>
+<p><img src="../Visual/Native.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.7: Multivariate analysis of native vs income</p>
+<p>In native (country of origin/grandfather), it can be seen that the income trend is less observable, meaning that the country of origin/grandfather is not a strong factor that can influence income.</p>
+<hr>
+<p><img src="../Visual/MultivariateVisNum.png" alt="Multivariate Visualization" title="Multivariate result">
+Figure 2.8: Multivariate analysis numerical-values ​​vs income</p>
+<p>In the visualization of numeric features against income, it can be seen that there is less visible pattern in the influence of numeric features. This implies that the correlation value between numeric features and income is not very significant.</p>
+<hr>
+<p><em><strong>Analysis and interpretation of Multivariate Analysis results:</strong></em></p>
+<ol>
+<li>
+<p>The results of the Multivariate Analysis show that the clearest trends are in educationClass, status, and relationship.</p>
+</li>
+<li>
+<p>In Figure 2.1, which visualizes the educationClass analysis of income, it can be seen that there is a high jump starting from undergraduate education, and income increases as the level of education increases.</p>
+</li>
+<li>
+<p>In Figures 2.2 and 2.4, status and relationship, it can be seen that samples in healthy marital relationships will have higher incomes compared to other statuses, and this is confirmed in the analysis of relationships.</p>
+</li>
+</ol>
+<p><img src="../Visual/corrmat.png" alt="Correlation matrix" title="Correlation Matrix">
+Figure 3.0: Correlation matrix of variables</p>
+<p>The results of the correlation matrix above show that strong features such as educationClass are not too far from the correlation value with low values, such as capital-gain. Therefore, no more column drops will be performed.</p>
+<h2 id="data-preparation"><em><strong>Data Preparation</strong></em></h2>
+<p>Sequentially, the data preparation processes that will be carried out are as follows:</p>
+<ol>
+<li>
+<p>Features Encoding</p>
+<ul>
+<li>Features Encoding is the conversion of categorical features into numeric representation. The reasons for Features Encoding are as follows:
+<ul>
+<li>Although there are models that can process categorical data, the majority of existing models still require input in numeric form.</li>
+<li>Continuing from the first point, sometimes there are ordinal relationships in the dataset. Representing categorical data as numeric can help preserve these relationships, so that they are implicitly understood by the model.</li>
+<li>Machine learning models are models based on mathematics and statistics, so processing them in numerical form will speed up the training and testing process.</li>
+</ul>
+</li>
+<li>The Features Encoding techniques that will be used in this project are:
+<ol>
+<li>Ordinal Encoding</li>
+<li>One Hot Encoding</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Train Test Split</p>
+<ul>
+<li>Train Test Split is a standard procedure in Machine Learning, where the dataset will be divided into training data (train) and test. This is done to ensure that the trained model can solve problems on real data that it has never encountered.</li>
+</ul>
+</li>
+<li>
+<p>KNN Imputation</p>
+<ul>
+<li>KNN Imputation is one of the processes that will be tested in this project, where missing values ​​will be filled by looking at the similarity of other features in the same row, and inputting new values. KNN Imputation can cause Data Leakage, so it needs to be considered as a transformation process, rather than pre-processing. That is why KNN Imputation is done after the Train Test Split process.</li>
+</ul>
+</li>
+<li>
+<p>Standardization</p>
+<ul>
+<li>Standardization is also a standard procedure in performing Machine Learning. According to Google Machine Learning Developers<a href="https://developers.google.com/machine-learning/data-prep/transform/normalization#:~:text=The%20goal%20of%20normalization%20is,training%20stability%20of%20the%20model">[5]</a>, standardization is a method for changing the numerical values ​​in data to a very similar scale, to improve the performance and stability of the model during train and test.</li>
+</ul>
+</li>
+</ol>
+<p>After the explanation regarding the project above, here is the flow that of the Data Preparation stage.</p>
+<ol>
+<li>Features Encoding.</li>
+</ol>
+<ul>
+<li>The input at this stage is three DataFrames, with the following descriptions:
+<ul>
+<li>One original DataFrame, there are still missing values, and</li>
+<li>Two identical DataFrames where Dropping has been performed. On the original DataFrame and one Dropped DataFrame, Ordinal Encoding is performed, and One Hot Encoding on the remaining DataFrame. Thus, the output of this stage is three DataFrames,
+<ul>
+<li>Dropped One Hot Encoded,</li>
+<li>Dropped Ordinal Encoded, dan</li>
+<li>Data Asli Ordinal Encoded.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Train Test Split</li>
+</ol>
+<ul>
+<li>Train Test Split is performed on each DataFrame, separating them into x and y.</li>
+</ul>
+<ol start="3">
+<li>KNN Imputation</li>
+</ol>
+<ul>
+<li>KNN Imputation is only performed on the Original Ordinal Encoded DataFrame. KNN Imputation is performed after Train Test Split to prevent Data Leakage.</li>
+</ul>
+<ol start="4">
+<li>Standarisasi</li>
+</ol>
+<ul>
+<li>At this stage standardization is performed on all x_train and x_test on all DataFrames, preparing the data for train and test.</li>
+</ul>
+<h2 id="model-development"><em><strong>Model Development</strong></em></h2>
+<p>The Model Development process that the Author will carry out can be divided into several stages:</p>
+<ol>
+<li>
+<p>DataFrame initialization: prepare dataframes to store the model training results.</p>
+</li>
+<li>
+<p>Pipeline Prep: prepare pipelines to simplify model training.</p>
+</li>
+<li>
+<p>Model Training: train the model.</p>
+</li>
+<li>
+<p>Visualization</p>
+</li>
+</ol>
+<p>Model building and training will be done simultaneously using pipelines.</p>
+<p><em><strong>Model Explanation, pros and cons</strong></em></p>
+<hr>
+<p>In this project, the author uses four algorithms, including Random Forest, K-Nearest Neighbor, XGBoost, and AdaBoostt.</p>
+<ol>
+<li><strong>Random Forest</strong></li>
+</ol>
+<ul>
+<li>
+<p>Random Forest is a Supervised Learning Based Algorithm, and is an implementation of ensemble learning. The Ensemble model itself is a group of models that work together to improve prediction performance. Random Forest is an ensemble (collection) of many decision tree models , combined with the Bagging technique , where each decision tree will produce a prediction, Bagging in the case of classification will take the most predictions on the entire tree as the final prediction. This is very suitable for this project because this property makes Random Forest not susceptible to bias.</p>
+</li>
+<li>
+<p>In this project, the parameters for the Random Forest algorithm used are:</p>
+<ul>
+<li>n_estimator = 50
+<ul>
+<li>n_estimator is a parameter that determines the number of trees (decision trees) to be used in the Random Forest algorithm. The author used 50 for the experiment and the accuracy obtained was quite good. Since the accuracy of the Random Forest algorithm is not a priority goal of the project, 50 trees are considered sufficient</li>
+</ul>
+</li>
+<li>max_depth = 16
+<ul>
+<li>max_depth is a parameter that determines the depth of the tree, more precisely how much the tree can be divided to perform computation/observation. Similar to the first parameter, the accuracy is already good, so max_depth = 16 is considered sufficient.</li>
+</ul>
+</li>
+<li>random_state = 55
+<ul>
+<li>random_state is a parameter to set the random generator to ensure that every training/testing process is consistent.</li>
+</ul>
+</li>
+<li>n_jobs = -1
+<ul>
+<li>n_jobs is a parameter used to set the number of jobs running in parallel. n_jobs = -1 means all processes run in parallel.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>From the brief explanation regarding the Random Forest algorithm above, some of its advantages and disadvantages are as follows:</p>
+<ul>
+<li>Pros:</li>
+</ul>
+<ol>
+<li>Can be used for both classification and regression.</li>
+<li>Can be used on categorical and numeric data.</li>
+<li>Can work without scaling and transformation.</li>
+<li>Can perform feature selection implicitly, and is robust to outliers</li>
+<li>Can work on both linear and non-linear problems, is robust to bias, and is accurate.</li>
+</ol>
+<ul>
+<li>Cons:</li>
+</ul>
+<ol>
+<li>Computationally expensive, especially on large datasets.</li>
+<li>Not flexible, not much to be adjusted (less effective for tuning)</li>
+</ol>
+</li>
+<li>
+<p><strong>K-Nearest Neighbor</strong></p>
+<ul>
+<li>KNN works by using feature similarities to predict the value of each new data. Mathematically, the KNN algorithm calculates the (Euclidean) distance between each data point and chooses a classification based on the majority of nearest neighbors. When viewed from the complexity of the algorithm, KNN can be categorized as a simpler algorithm. KNN is a frequently used algorithm, including in this project, because of its simplicity and no assumptions. However, it should be noted that the curse of Dimensionality is not very effective on datasets with very many features.</li>
+</ul>
+</li>
+<li>
+<p>In this project, the parameters used by the KNN model are:</p>
+<ul>
+<li>n_neighbors = 10
+<ul>
+<li>n_neighbors is a parameter to set how many neighbors will be considered for the Euclidean distance calculation process. The author chose 10 neighbors, because there are several features that have very weak correlations, so it is expected that these weak features are not prioritized in the training process.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>From the brief explanation regarding the KNN algorithm above, some of its advantages and disadvantages are as follows:</p>
+<ul>
+<li>Pros:</li>
+</ul>
+<ol>
+<li>Simple, intuitive and easy to use.</li>
+<li>Very effective on multi-class problems.</li>
+<li>Easy to tune because the distance can be adjusted between Euclidean, Hamming, Manhattan, Minkowski, etc</li>
+<li>No assumptions.</li>
+</ol>
+<ul>
+<li>Lack:</li>
+</ul>
+<ol>
+<li>Curse of Dimensionality, weak against datasets with large dimensions.</li>
+<li>KNN is not the fastest algorithm.</li>
+<li>Scaling and Transformation are mandatory.</li>
+<li>Weak against outliers, missing values, and imbalanced datasets.</li>
+</ol>
+</li>
+<li>
+<p><strong>XGBoost</strong></p>
+<ul>
+<li>eXtreme Gradient Boosting (XGBoost) is an ensemble learning and boosting-based model, and is derived from the Gradient Boosting Decision Tree framework. Boosting itself is a process that creates and combines weak learner models iteratively to produce a strong learner model. The way boosting works is by building models sequentially with a focus on previously incorrect data. In the case of XGBoost, or Gradient Boosting in general, the iteration of model creation and combination is done based on the gradient of error or what is often called the Gradient Loss Function. Fundamentally, the difference between XGBoost and AdaBoost is the loss function used.</li>
+</ul>
+</li>
+<li>
+<p>From the brief explanation regarding the XGBoost algorithm above, some of its advantages and disadvantages are as follows:</p>
+<ul>
+<li>Pros:</li>
+</ul>
+<ol>
+<li>Fast.</li>
+<li>Very resistant to outliers</li>
+<li>Flexible, able to adapt to high data variations.</li>
+<li>Built-in regularization.</li>
+<li>High accuracy.</li>
+</ol>
+<ul>
+<li>Cons:</li>
+</ul>
+<ol>
+<li>Computationally expensive.</li>
+<li>Complex.</li>
+<li>Similar to Random Forest, XGBoost is less amenable to hyperparameter tuning.</li>
+</ol>
+</li>
+<li>
+<p><strong>AdaBoost</strong></p>
+<ul>
+<li>Adaptive Boosting (AdaBoost) is a Supervised Learning Based Algorithm that implements ensemble learning and boosting. Similar to XGBoost, AdaBoost works by creating a number of weak learners based on decision trees, then creating subsequent models with the wrong answers from the previous model. Unlike XGBoost, AdaBoost uses Exponential Loss Function.</li>
+</ul>
+</li>
+<li>
+<p>In this project, the parameters for the AdaBoost algorithm used are:</p>
+<ul>
+<li>n_estimators = 50
+<ul>
+<li>Similar to the Random Forest algorithm, AdaBoost accepts a n_estimators parameter to set the number of decision trees to be generated. The author used 50 as an experiment, and the results obtained were sufficient.</li>
+</ul>
+</li>
+<li>random_state = 123
+<ul>
+<li>random_state is a parameter to set the random generator to ensure that every training/testing process is consistent.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>From the brief explanation regarding the AdaBoost algorithm above, some of its advantages and disadvantages are as follows:</p>
+<ul>
+<li>Pros:</li>
+</ul>
+<ol>
+<li>High potential, significantly improving model performance.</li>
+<li>Computationally inexpensive.</li>
+<li>Flexible, can be used in various cases.</li>
+<li>Can be used with other models.</li>
+</ol>
+<ul>
+<li>Cons:</li>
+</ul>
+<ol>
+<li>High variance.</li>
+<li>Less effective in linear problems.</li>
+<li>More susceptible to outliers.</li>
+</ol>
+</li>
+</ul>
+<h2 id="evaluation"><em><strong>Evaluation</strong></em></h2>
+<p>In this project, some evaluation metrics used are as follows. Before going into further explanation of the metrics, it is necessary to understand that::</p>
+<ul>
+<li>TN = True Negative, negative data that is predicted to be negative (true)</li>
+<li>TP = True Positive, positive data that is predicted to be negative (true)</li>
+<li>FN = False Negative, negative data that is predicted positive (wrong)</li>
+<li>FP = False positive, positive data that is predicted to be negative (wrong)</li>
+</ul>
+<p>First, Accuracy, which can be calculated using the formula:</p>
+<p>$$Accuracy = \frac{TN + TP}{TN + FP + TP + FN}$$</p>
+<p>Accuracy represents the number of correctly predicted data divided by the total number of data. Ideally, accuracy gives an idea of ​​how well a model can predict data, but the downside of this metric is that it is less fair if the dataset used is unbalanced .</p>
+<p>Next is precision, which can be calculated using the formula:</p>
+<p>$$Precision = \frac{TP}{FP + TP}$$</p>
+<p>Precision is the ratio of true positive predictions (TP) to total positive predictions. The higher the precision, the fewer the number of false positive predictions (FP).</p>
+<p>Then there is the Recall metric, as follows.</p>
+<p>$$Recall = \frac{TP}{TP + FN}$$</p>
+<p>Recall measures the value of the correct positive predictions from the actual number of positives. The higher the recall value, the fewer the False Negatives (FN).</p>
+<p>After calculating the Accuracy, Precision, and Recall metrics, we can find the F1 Score value using the following formula.</p>
+<p>$$F1 Score = 2* \frac{Precision * Recall}{Precision + Recall}$$</p>
+<p>F1 Score is a harmonic value that uses precision and Recall, meaning that a high F1 Score value has high Precision and Recall.
+<strong>Model Training Results</strong></p>
+<hr>
+<ul>
+<li>Visualization
+<img src="../Visual/trainAcc.png" alt="Train Acc" title="Train Accuracies Result">
+Figure 4.0: Model training results</li>
+</ul>
+<p>Table 2.0 Evaluation of training Accuracy, Precision, Recall, and F1 Score data Dropped One Hot Encoded</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.864862</td>
+<td>0.794974</td>
+<td>0.612125</td>
+<td>0.691669</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.877515</td>
+<td>0.840669</td>
+<td>0.623536</td>
+<td>0.716003</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.88582</td>
+<td>0.821095</td>
+<td>0.689026</td>
+<td>0.749285</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.858154</td>
+<td>0.770313</td>
+<td>0.608653</td>
+<td>0.680007</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2.1 Evaluation of training Accuracy, Precision, Recall, and F1 Score Dropped Ordinal Encoded data</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.860758</td>
+<td>0.787511</td>
+<td>0.599424</td>
+<td>0.680714</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.89845</td>
+<td>0.868751</td>
+<td>0.69488</td>
+<td>0.772148</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.887442</td>
+<td>0.8215</td>
+<td>0.696864</td>
+<td>0.754067</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.855402</td>
+<td>0.767718</td>
+<td>0.596547</td>
+<td>0.671394</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2.2 Evaluation of training Accuracy, Precision, Recall, and F1 Score of KNN data Imputed Ordinal Encoded</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.86414</td>
+<td>0.787736</td>
+<td>0.589262</td>
+<td>0.674195</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.900721</td>
+<td>0.859779</td>
+<td>0.697597</td>
+<td>0.770243</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.891053</td>
+<td>0.82002</td>
+<td>0.696071</td>
+<td>0.752979</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.859909</td>
+<td>0.775178</td>
+<td>0.581347</td>
+<td>0.664414</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>From the training results, the two best models are Random Forest and XGBoost. This is proven not only by the very high training accuracy, but also by the very high F1 Score. A high F1 Score is an indication that the model rarely makes mistakes in predicting true or false values. The explanation of the F1 Score will be explained in more depth at the Evaluation stage.</p>
+</li>
+<li>
+<p>It can also be observed that from the One Hot Encoded and Ordinal Encoded drop datasets, there is a significant change (up to two percent increase) in training accuracy. This shows the importance of preserving ordinality in the dataset (if any), which in this case is mainly in the educationClass feature.</p>
+</li>
+<li>
+<p>The final prediction test will use test data from test_ord, because this dataset implements Ordinal Encoding and has a higher level of integrity than the imputation dataset. Given that the number of this dataset is abundant from the beginning, the Drop method remains the best Data Handling method because of its integrity preservation.</p>
+</li>
+</ol>
+<p><em><strong>Testing and Final Predictions</strong></em></p>
+<hr>
+<p>Looking at the results of the training results above, especially from test_dum and test_ord, it can be seen that there is an increase in accuracy from the two models with the highest accuracy, namely Random Forest and XGBoost. This confirms that it is important to store ordinality features (if any) which in this case are in the dataset, especially educationClass.</p>
+<p>Consistently, the Random Forest and XGBoost models produced high accuracy and F1 Score, an indication of a superior model.</p>
+<p>The final prediction test will use test data from test_ord because this dataset implements the Drop and Ordinal Encoding methods so that this dataset maintains its ordinality properties and has a higher level of integrity than the imputation dataset. Given that the number of this dataset is abundant from the beginning, the Drop method remains the best Data Handling method because of its integrity preservation.</p>
+<p>The Testing method will be the same as the Training method, using Pipeline to increase Testing efficiency.</p>
+<p><em><strong>Testing Results</strong></em></p>
+<hr>
+<p>Table 3.0 Evaluation of test Accuracy, Precision, Recall, and F1 Score data Dropped One Hot Encoded</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.858943</td>
+<td>0.770925</td>
+<td>0.619469</td>
+<td>0.686948</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.928366</td>
+<td>0.930556</td>
+<td>0.770796</td>
+<td>0.843175</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.940084</td>
+<td>0.909438</td>
+<td>0.844248</td>
+<td>0.875631</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.86845</td>
+<td>0.772126</td>
+<td>0.671681</td>
+<td>0.71841</td>
+</tr>
+</tbody>
+</table>
+<p>Table 3.1 Evaluation of test Accuracy, Precision, Recall, and F1 Score data Dropped Ordinal Encoded</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.853858</td>
+<td>0.77686</td>
+<td>0.582301</td>
+<td>0.665655</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.954455</td>
+<td>0.93097</td>
+<td>0.883186</td>
+<td>0.906449</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.941853</td>
+<td>0.897342</td>
+<td>0.866372</td>
+<td>0.881585</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.860491</td>
+<td>0.759086</td>
+<td>0.646903</td>
+<td>0.698519</td>
+</tr>
+</tbody>
+</table>
+<p>Table 3.2 Evaluation of training Accuracy, Precision, Recall, and F1 Score of KNN data Imputed Ordinal Encoded</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KNN</td>
+<td>0.845855</td>
+<td>0.762911</td>
+<td>0.541216</td>
+<td>0.63322</td>
+</tr>
+<tr>
+<td>RandomForest</td>
+<td>0.951894</td>
+<td>0.917098</td>
+<td>0.884263</td>
+<td>0.900382</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.938588</td>
+<td>0.895522</td>
+<td>0.849292</td>
+<td>0.871795</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>0.854452</td>
+<td>0.751025</td>
+<td>0.610325</td>
+<td>0.673404</td>
+</tr>
+</tbody>
+</table>
+<p>A summary and visualization of the data handling methods, and their accuracy can be seen as follows.</p>
+<p><img src="../Visual/testAcc.png" alt="Test Acc" title="Test Accuracies Result">
+Figure 5.0: Testing results</p>
+<p>The test results that will be reviewed, and used for the final prediction, are from the test data with Dropped Encoded. This is because the Drop method is the best method in maintaining data integrity, where the results can be seen from the following Confusion Matrix visualization.</p>
+<p><img src="../Visual/ConfusionMatrix.png" alt="Confusion Matrix" title="Test Confusion Matrix">
+Figure 5.1: Confusion matrix testing</p>
+<h2 id="project-results-and-conclusions"><em><strong>Project Results and Conclusions</strong></em></h2>
+<p>Based on the results of Data Understanding, Data Preparation, Model Development, and Evaluation, we can conclude the following things.</p>
+<ol>
+<li>Answering Problem Statement 1: The features that have the most influence on income in this problem are educationClass, status, and relationship.</li>
+<li>Answering Problem Statement 2: Yes, income can be predicted, and based on the Accuracy, Recall, Precision, and F1 Score values , the Random Forest model is the model with the best performance, achieving an accuracy of up to 95.4%, a precision of up to 93%, a recall of 88.3%, and an F1Score of 90.6%. This is one of the advantages of Random Forest, namely its nature of performing feature selection implicitly. Plus the properties inherited from ensemble learning , namely resistance to bias and overfitting.</li>
+<li>There is an observable effect in the form of increased model performance if ordinality preservation (if present in the dataset) is performed.</li>
+<li>KNN Imputation has a less significant impact compared to point number 3, but performance still increases.</li>
+</ol>
+<p>Based on the findings above, it can be concluded that this project was successful and ran according to the Author's wishes, namely answering the Problem Statements and achieving the formulated Predictive Modeling Goals, and successfully observing the differences in ordinality and the influence of KNN Imputation on the dataset.</p>
+<h2 id="reference"><em><strong>Reference</strong></em></h2>
+<p>[Dataset] Becker, Barry and Kohavi ,Ronny. (1996). Adult. UCI Machine Learning Repository. https://doi.org/10.24432/C5XW20.</p>
+<p>[1] Badan Pusat Statistika Indonesia. (2023). Diakses dari https://www.bps.go.id/id/pressrelease/2023/11/06/2002/tingkat-pengangguran-terbuka--tpt--sebesar-5-32-persen-dan-rata-rata-upah-buruh-sebesar-3-18-juta-rupiah-per-bulan.html .</p>
+<p>[2] R. Pramudjasi, Juliansyah, D. Lestari. (2019). Effect of population and education and wages on unemployment in paser regency. Journal of Faculty of Economics and Business Universitas Mulawarman. Diakses dari https://journal.feb.unmul.ac.id/index.php/KINERJA/article/download/5284/472.</p>
+<p>[3] S.A.E. Sari, F.W.Pangestuty. (2020). Analisis Pengaruh jumlah Penduduk, Tingkat Pendidikan, dan Produk Domestik Regional Bruto Terhadap Tingkat Pengangguran Terbuka di Provinsi Jawa Timur Tahun 2017-2020. Journal of Developement Econoic and Social Studies. Diakses dari https://jdess.ub.ac.id/index.php/jdess/article/download/78/57/373.</p>
+<p>[4] B. Jepchumba. (2020). Getting started with using Visual Machine Learning Tools for building your Machine Learning Models. Microsoft Community Hub. Diakses dari https://techcommunity.microsoft.com/t5/educator-developer-blog/getting-started-with-using-visual-machine-learning-tools-for/ba-p/3578397.</p>
+<p>[5] Google Machine Learning Developers. Normalization. Diakses dari https://developers.google.com/machine-learning/data-prep/transform/normalization#:~:text=The%20goal%20of%20normalization%20is,training%20stability%20of%20the%20model.</p>
+<h2 id="Blibliography"><em><strong>Blibliography</strong></em></h2>
+<p>[1] P. Schmitt, J. Mandel, M. Guedj. (2015). A Comparison of Six Methods for Missing Data Imputation. Journal of Biometrics and Biostatics. DOI: 10.472/2155-6180.1000224. Diakses dari https://www.hilarispublisher.com/open-access/a-comparison-of-six-methods-for-missing-data-imputation-2155-6180-1000224.pdf.</p>
+<p>[2] Kleindessner, M., Awasthi, P., &amp; Morgenstern, J. (2019). Fair k-Center Clustering for Data Summarization. International Conference on Machine Learning. Diakses dari https://www.semanticscholar.org/paper/Fair-k-Center-Clustering-for-Data-Summarization-Kleindessner-Awasthi/9c26bbf34bdab544a000038d628a8fb232d60cb6.</p>
+<p>[3] Goutte, C., &amp; Gaussier, E. (2005). A Probabilistic Interpretation of Precision, Recall and F-Score, with Implication for Evaluation. Advances in Information Retrieval, 345–359. Diakses dari doi:10.1007/978-3-540-31865-1_25.</p>
+<p>[4] J. Brownlee. (2020). Machine Learing Mastery. Diakses dari https://machinelearningmastery.com/one-hot-encoding-for-categorical-data/ .</p>
+
+
+</body>
+</html>
